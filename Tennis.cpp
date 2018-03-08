@@ -41,6 +41,7 @@ int tennis(std::vector<Interval> lessons){
 		int start = pq.top().start;
 		int end = pq.top().end;
 		bool done = false;
+		pq.pop();
 		for(int i = 0; i< courts.size(); i++){
 			if(start >= courts[i]){
 				done = true;
