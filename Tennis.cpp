@@ -10,6 +10,7 @@
 
 #include "Tennis.hpp"
 #include <queue>
+#include <iostream>
 
 /*
 bool compare(std::pair<int,int> p1, std::pair<int,int> p2 ){
@@ -25,10 +26,11 @@ int tennis(std::vector<Interval> lessons){
 	/*std::priority_queue< std::pair<int,int>, std::vector<std::pair<int,int>, 
 	bool(*)(std::pair<int,int>,std::pair<int, int)> pq(compare);*/
 
-	std::priority_queue< Interval, Interval, bool(*)(Interval, Interval> pq(compare);
+	std::priority_queue< Interval, std::vector<Interval>,bool(*)(Interval, Interval)> pq(compare);
 
 	for(auto it = lessons.begin(); it != lessons.end(); ++it){
-		pq.push(*it)
-	}	
+		pq.push(*it);
+	}
+	std::cout<<"first elem start: "	<< pq.top().start << std::endl;
 }
 #endif
