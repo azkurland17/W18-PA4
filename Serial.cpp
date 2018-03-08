@@ -2,7 +2,7 @@
 //
 // Name: Alexandra Kurland 
 // PID: A92137786
-// Sources of Help: TODO
+// Sources of Help: Discussion slides
 // Due: March 10th, 2018 at 11:59 PM
 
 #ifndef __SERIAL_CPP__
