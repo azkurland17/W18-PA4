@@ -31,6 +31,40 @@ int tennis(std::vector<Interval> lessons){
 	for(auto it = lessons.begin(); it != lessons.end(); ++it){
 		pq.push(*it);
 	}
-	std::cout<<"first elem start: "	<< pq.top().start << std::endl;
+	//std::cout<<"first elem start: "	<< pq.top().start << std::endl;
+	std::vector<int> courts;
+	int firstEnd = pq.top().end;
+	pq.pop();
+	courts.push_back(firstEnd);
+
+	while(!pq.empty()){
+		int start = pq.top().start;
+		int end = pq.top().end;
+		bool done = false;
+		for(int i = 0; i< courts.size(); i++){
+			if(start >= courts[i]){
+				done = true;
+				courts[i] = end;
+				break;
+			}
+		}
+		if(!done){
+			//must add another court
+			courts.push_back(end);
+		}
+	}
+	return courts.size();
 }
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
