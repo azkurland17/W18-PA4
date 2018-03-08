@@ -12,32 +12,26 @@
 #include <queue>
 #include <iostream>
 
-/*
-bool compare(std::pair<int,int> p1, std::pair<int,int> p2 ){
-      return p1.first > p2.first;
-}
-*/
+
 bool compare(Interval i1, Interval i2 ){
       return i1.start > i2.start;
 }
-
+//using greedy alg to place intervals by start time 
+//and add a new court when times conflict
 int tennis(std::vector<Interval> lessons){
 	//first sort the input 
-	/*std::priority_queue< std::pair<int,int>, std::vector<std::pair<int,int>, 
-	bool(*)(std::pair<int,int>,std::pair<int, int)> pq(compare);*/
-
 	std::priority_queue< Interval, std::vector<Interval>,bool(*)(Interval, Interval)> pq(compare);
 
 	for(auto it = lessons.begin(); it != lessons.end(); ++it){
 		pq.push(*it);
 	}
-	//std::cout<<"first elem start: "	<< pq.top().start << std::endl;
 	std::vector<int> courts;
 	int firstEnd = pq.top().end;
 	pq.pop();
 	courts.push_back(firstEnd);
 
 	while(!pq.empty()){
+		//store the ending times in an array
 		int start = pq.top().start;
 		int end = pq.top().end;
 		bool done = false;
