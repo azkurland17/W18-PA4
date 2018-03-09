@@ -17,75 +17,50 @@ int buildings(TwoD_Array<int> survey) {
   TwoD_Array<int> * ar = &survey;
   int row = survey.getNumRows();
   int col = survey.getNumCols();
-  std::queue<std::pair<int,int>> q; 
   for(int rInd = 0; rInd < row; rInd++){
   	for(int cInd = 0; cInd < col; cInd++ ){
   		if(survey.at(rInd,cInd) == 1){
-  		//if one then check to the left and to the right
-  		int cCheck = cInd;
-  		int rCheck = rInd;
-  		//set equal to 0
-  		survey.at(rCheck,cCheck) = 0;
+  		//if one then delete and run bfs!!
+  		survey.at(rInd,cInd) = 0;
+  		std::queue<std::pair<int,int>> q; 
+  		std::pair<int,int> p(rInd,cInd);
+  		q.push(p);
+  		std::pair<int,int> curr;
+  			while(!q.empty()){
+  				curr = q.front();
+  				q.pop();
+  				//for all neighbors of curr
+  				if(cInd < size -1 ){
+  					//check if one over right is one
+  					if(survey.at(cInd+1, rInd) == 1){
+  						q.push(std::pair<int,int> d(cInd+1, rInd));
+  					}	
+  				}
+  				if(cInd > 0 ){
+  					//check if one over left is one
+  					if(survey.at(cInd-1, rInd) == 1){
+  						q.push(std::pair<int,int> d(cInd-1, rInd));
+  					}	
+  				}
+  				if(rInd > 0 ){
+  					//check if one above
+  					if(survey.at(cInd, rInd+1) == 1){
+  						q.push(std::pair<int,int> d(cInd, rInd+1));
+  					}	
+  				}
+  				if(rInd < row -1 ){
+  					//check if one below
+  					if(survey.at(cInd, rInd-1) == 1){
+  						q.push(std::pair<int,int> d(cInd, rInd-1));
+  					}	
+  				}
 
-  		checkN(ar, row, col, cCheck, rCheck);
-  			//while
-
-  		}
-  		while(!q.empty()){
-  			checkN()
-  		}
-  	}
-  }
-}
-
-void checkN(TwoD_Array & arr, int col, int row, int c, int r, std::queue<std::pair<int,int>>){
- int cCheck = c;
- int rCheck = r;
-
- while(cCheck < col -1){ //idk
-  	cCheck = cCheck + 1; //going all the way to the right
-  	if(survey.at(rCheck, cCheck) == 1){ //erase
-  		survey.at(rCheck,cCheck) = 0;
-  		//look at its up and down neighbors to add them to queue
-  		if(rCheck > 0){
-  			if(survey.at(rCheck + 1,cCheck) == 1){
-  				std::pair<int,int> p(rCheck-1,cCheck);
- 				q.push(p);
- 			}
-  		}
-  		if(rCheck < row - 1){
-  			if(survey.at(rCheck -1, cCheck) == 1){
-  				std::pair<int,int> p(rCheck +1, cCheck);
-  				q.push(p);
   			}
   		}
+  		buildings = buildings + 1;
   	}
-  }
-  cCheck = c;
-  rCheck = r;
-  while(cCheck > 0){
-  	cCheck = cCheck - 1; //go all the way to the left
-  	if(survey.at(rCheck, cCheck) == 1){
-  		//maybe set to 0?
-  		survey.at(rCheck,cCheck) = 0;
-  		if(rCheck > 0){
-  			if(survey.at(rCheck + 1,cCheck) == 1){
-  				std::pair<int,int> p(rCheck-1,cCheck);
- 				q.push(p);
- 			}
-  		}
-  		if(rCheck < row - 1){
-  			if(survey.at(rCheck -1, cCheck) == 1){
-  				std::pair<int,int> p(rCheck +1, cCheck);
-  				q.push(p);
-  			}
-  		}
-  	}
-  }
-  //here all of the stuff is added to the q
-  //pop from the q and go through the same method
-
-
-
+   }
+   return buildings;	
  }
+
 #endif
