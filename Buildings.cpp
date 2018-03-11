@@ -41,6 +41,7 @@ int buildings(TwoD_Array<int> survey) {
   					if(survey.at(rIndx, cIndx+1) == 1){
   						std::pair<int,int> d(rIndx, cIndx+1);
 						q.push(d);
+						survey.at(rIndx, cIndx+1) = 0;
 		//				std::cout<<"right"<<std::endl;
   					}	
   				}
@@ -49,6 +50,7 @@ int buildings(TwoD_Array<int> survey) {
   					if(survey.at(rIndx, cIndx-1) == 1){
   						std::pair<int,int> d(rIndx, cIndx-1);
 						q.push(d);
+						survey.at(rIndx, cIndx-1) = 0;
 		//				std::cout<<"left"<<std::endl;
   					}	
   				}
@@ -57,6 +59,7 @@ int buildings(TwoD_Array<int> survey) {
   					if(survey.at(rIndx-1, cIndx)  == 1){
   						std::pair<int,int> d( rIndx-1, cIndx);
   						q.push(d);
+						survey.at(rIndx-1, cIndx)= 0;
 		//				std::cout<<"up"<<std::endl;
 					}	
   				}
@@ -66,6 +69,7 @@ int buildings(TwoD_Array<int> survey) {
   						std::pair<int,int> d(rIndx+1,cIndx);
 		//				std::cout<<"heredksfljdlsfjvfslsfjf"<<std::endl;
 						q.push(d);
+						survey.at(rIndx+1, cIndx)= 0;
   					}	
   				}
 
